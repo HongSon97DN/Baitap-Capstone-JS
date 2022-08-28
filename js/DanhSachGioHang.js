@@ -1,0 +1,3 @@
+function DanhSachGioHang(){
+    this.mangGH = [];
+}
