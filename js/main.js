@@ -5,20 +5,20 @@ var spGH = new SanPhamGioHang();
 var DSGH = new DanhSachGioHang();
 
 
-function getProductList() {
+function danhSachSanPham() {
   spService
-    .getProductList()
+    .danhSachSanPham()
     .then(function (result) {
       productList.push(result.data);
-      showTable(result.data);
+      hienThiSanPham(result.data);
     })
     .catch(function (error) {
       console.log(error);
     });
 }
-getProductList();
+danhSachSanPham();
 
-function showTable(productList) {
+function hienThiSanPham(productList) {
   var content = "";
   productList.map(function (sp, index) {
     content += `
@@ -48,7 +48,7 @@ function showTable(productList) {
   document.querySelector("#productList").innerHTML = content;
 }
 
-function showSearch() {
+function hienThiTimKiem() {
   var phone = [];
   var value = document.getElementById("selectSearch").value;
   productList.filter(function (sp, index) {
@@ -56,21 +56,21 @@ function showSearch() {
       for (var i = 0; i < sp.length; i++) {
         if (sp[i].type === "Iphone") {
           phone.push(sp[i]);
-          showTable(phone);
+          hienThiSanPham(phone);
         }
       }
     } else if (value === "samsung") {
       for (var i = 0; i < sp.length; i++) {
         if (sp[i].type === "Samsung") {
           phone.push(sp[i]);
-          showTable(phone);
+          hienThiSanPham(phone);
         }
       }
     } else {
       for (var i = 0; i < sp.length; i++) {
         if (sp[i].type === "Samsung" || sp[i].type === "Iphone") {
           phone.push(sp[i]);
-          showTable(phone);
+          hienThiSanPham(phone);
         }
       }
     }
@@ -105,17 +105,17 @@ function themSanPham(id) {
           result.data.total
         );
         mangGH.push(spGH);
-        // console.log(mangGH)
+ 
       }
-      showspGH(mangGH)
-      // console.log(mangGH);
+      hienThispGH(mangGH)
+
     })
     .catch((error) => {
       console.log(error);
     });
 }
 
-function showspGH(mangGH) {
+function hienThispGH(mangGH) {
   let content = "";
   mangGH.map(function (spGH, index) {
     content += `
@@ -220,7 +220,7 @@ let xoaSanPham = (id) => {
   if (viTri > -1) {
     mangGH.splice(viTri, 1);
   }
-  showspGH(mangGH);
+  hienThispGH(mangGH);
 }
 
 
